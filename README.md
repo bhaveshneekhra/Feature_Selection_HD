@@ -97,13 +97,13 @@ To reproduce Figure 1 from the paper, ensure your configuration (config.yaml) co
     # x_from_paper: 35
     # y_from_paper: .86
 
-▶️ Run the Code
+### 4. ▶️ Run the Code
 
 ```bash
 python3 runner_code.py
 ```
 
-📊 Output
+### 5. 📊 Output 
 
 This will reproduce accuracy plots as in Figure 1 of the referenced paper. You can enable AUC plots or paper annotation in the config file if needed.
 

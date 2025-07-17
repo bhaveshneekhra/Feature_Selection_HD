@@ -44,27 +44,27 @@ Directory structure
 
 Download Datasets
 
-        You can download the datasets manually or via wget:
+You can download the datasets manually or via wget:
 
-        🔹 Option 1: Manual Download
+🔹 Option 1: Manual Download
 
-            Visit the CuMiDa repository and search for:
+    Visit the CuMiDa repository and search for:
 
-                •	GSE18842
-                •	GSE19804
+        •	GSE18842
+        •	GSE19804
 
-            For TCGA LUAD/LUSC, use the GDC Data Portal. 
+    For TCGA LUAD/LUSC, use the GDC Data Portal. 
 
-        🔹 Option 2: Command-line Download
+🔹 Option 2: Command-line Download
 
-            ```bash
-            cd datasets/
+```bash
+cd datasets/
 
-            wget https://sbcb.inf.ufrgs.br/data/cumida/Genes/Lung/GSE18842/Lung_GSE18842.csv
+wget https://sbcb.inf.ufrgs.br/data/cumida/Genes/Lung/GSE18842/Lung_GSE18842.csv
 
-            wget https://sbcb.inf.ufrgs.br/data/cumida/Genes/Lung/GSE19804/Lung_GSE19804.csv
-            
-            ```
+wget https://sbcb.inf.ufrgs.br/data/cumida/Genes/Lung/GSE19804/Lung_GSE19804.csv
+
+```
 
 ⚙️ Configuration
 

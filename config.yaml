@@ -1,0 +1,85 @@
+download_datasets: 0
+dataset_urls:
+  - https://sbcb.inf.ufrgs.br/data/cumida/Genes/Lung/GSE18842/Lung_GSE18842.csv
+  - https://sbcb.inf.ufrgs.br/data/cumida/Genes/Lung/GSE19804/Lung_GSE19804.csv 
+  - https://archive.ics.uci.edu/static/public/170/gisette.zip
+
+#####################################
+# dataset SPECIFIC parameters: START
+#####################################
+
+train_test_sep: 0
+
+dataset: "GSE4115"
+filepath: './datasets/GSE4115.csv'
+
+opt_model: 1
+remove_cols: True  # If number of features are more than 20,000 - set it to true
+
+annotate_paper_results: 0  # If 1, then paper, x_from_paper and y_from_paper should be defined.
+# paper: "Lall (2020)"
+# x_from_paper: 35   # No of selected features
+# y_from_paper: .86 # Accuracy with selected features, with decimal point not percentage
+
+###################################
+# dataset SPECIFIC parameters: END
+###################################
+
+
+########################################
+# COMMON parameters for datasets: START
+########################################
+
+target: 'type'
+
+model_name: "RF"
+
+random_state: 42
+debug: 1
+
+num_runs: 20  
+
+plot_acc: 1
+plot_auc: 1
+
+interactive: 0
+shuffle_cols: 0
+
+feature_ticks_ranges:
+  - [1, 51, 1]
+  - [60, 201, 10]
+  - [300, 2001, 100]
+
+######################################
+# COMMON parameters for datasets: END
+######################################
+
+# dataset: "GSE4115"
+# filepath: './datasets/GSE4115.csv'
+
+# dataset: "ALL_AML"
+# filepath: "./datasets/golub_all_aml.csv"
+
+# dataset: "TCGA"
+# filepath: "./datasets/tcga_final.parquet"
+
+# dataset: "TCGA_LUAD_LUSC"
+# filepath: "./datasets/TCGA_LUAD_LUSC_lung_only_data.csv"
+
+# dataset: "Lung_GSE18842"
+# filepath: "./datasets/Lung_GSE18842.csv"
+
+# test_dataset: "Lung_GSE19804"
+# test_filepath: "./datasets/Lung_GSE19804.csv"
+
+# dataset: "Lung_GSE19804"
+# filepath: "./datasets/Lung_GSE19804.csv"
+
+# test_dataset: "Lung_GSE18842"
+# test_filepath: "./datasets/Lung_GSE18842.csv"
+
+# dataset: "Gisette"
+# filepath: "./datasets/gisette/GISETTE/gisette_train.data"
+
+# test_dataset: "Gisette_validation"
+# test_filepath: "datasets/gisette/GISETTE/gisette_valid.data"

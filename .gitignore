@@ -1,0 +1,43 @@
+*.ipynb
+# !main.ipynb
+
+*.py
+!fs_utils.py
+!runner_code.py
+
+datasets/*
+
+*.csv
+
+!datasets/golub_all_aml.csv
+
+test_config.yaml
+
+*.parquet
+*.json
+*.txt
+
+!requirements.txt
+
+*.log
+*.pkl
+*.h5
+*.png
+*.zip
+*.pdf
+*.svg
+*.sh
+
+# !Plots/Breast_GSE70947/RF/Breast_GSE70947*
+# !Plots/Breast_GSE70947/Breast_GSE70947*
+
+__pycache__/
+fs_env/
+annot/
+downloads/
+exprs/
+pData/
+logs/
+
+
+.DS_Store

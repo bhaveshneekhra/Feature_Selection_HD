@@ -10,8 +10,8 @@ dataset_urls:
 
 train_test_sep: 0
 
-dataset: "GSE4115"
-filepath: './datasets/GSE4115.csv'
+dataset: "ALL_AML"
+filepath: "./datasets/golub_all_aml.csv"
 
 opt_model: 1
 remove_cols: True  # If number of features are more than 20,000 - set it to true

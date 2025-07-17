@@ -8,4 +8,4 @@ scikit-learn==1.5.2
 seaborn==0.13.2
 tqdm==4.66.1
 xgboost==2.0.1
-
+PyYAML==6.0.2

@@ -1,6 +1,6 @@
 # HD_Feature_Selection
 
-This repository contains code and configuration to reproduce the experiments and results presented in the paper on feature selection using high-dimensional lung cancer gene expression datasets.
+This repository contains code and configuration to reproduce the experiments and results presented in the paper on feature selection using high-dimensional datasets.
 
 ---
 

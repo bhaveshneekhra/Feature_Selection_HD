@@ -151,7 +151,7 @@ python3 runner_code.py
 
 ### 7. 📊 Output 
 
-Execution will create the following files for the dataset selected in the config file in the Plots/[DATASET] directory:
+A successful program execution will create the following files for the dataset selected in the config file in the Plots/[DATASET] directory:
 
     1. accuracy plot 
     2. AUC plot

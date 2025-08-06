@@ -34,7 +34,8 @@ source fs_env/bin/activate
 ```bash
 pip install -r requirements.txt
 ```
-📂 Dataset Preparation
+
+### 4. 📂 Dataset Preparation
 
 Directory structure
 
@@ -68,8 +69,7 @@ wget https://sbcb.inf.ufrgs.br/data/cumida/Genes/Lung/GSE18842/Lung_GSE18842.csv
 wget https://sbcb.inf.ufrgs.br/data/cumida/Genes/Lung/GSE19804/Lung_GSE19804.csv
 ```
 
-⚙️ Configuration
-
+### 5. ⚙️ Use appropriate configuration
 
 To reproduce Figure 1 from our paper, please ensure 
 
@@ -110,7 +110,8 @@ To reproduce Figure 1 from our paper, please ensure
     # y_from_paper: .86                                      # Reported accuracy in the paper
 ```
 
-We have also provided a dataset golub_all_aml.csv with this repository. To run the code with this dataset and also annotate the accuracy plot, use the following config (already included, so action needed):
+We have also provided a dataset golub_all_aml.csv with this repository. To run the code with this dataset and also annotate the accuracy plot, use the following config (already included, so NO action needed):
+
 ```bash
 train_test_sep: 0              # 0 = internal train-test split; 1 = external test set
 dataset: "ALL_AML"             # Identifier for the dataset used
@@ -142,15 +143,19 @@ y_from_paper: 0.86             # Reported accuracy or AUC in the paper
 
 ```
 
-### 4. ▶️ Run the Code
+### 6. ▶️ Run the Code
 
 ```bash
 python3 runner_code.py
 ```
 
-### 5. 📊 Output 
+### 7. 📊 Output 
 
-Execution will output accuracy and AUC plots with the result csv file for the dataset selected in the config file. 
+Execution will create the following files for the dataset selected in the config file in the Plots/[DATASET] directory:
+
+    1. accuracy plot 
+    2. AUC plot
+    3. The result csv file 
 
 📎 License
 

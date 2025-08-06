@@ -113,33 +113,33 @@ To reproduce Figure 1 from our paper, please ensure
 We have also provided a dataset golub_all_aml.csv with this repository. To run the code with this dataset and also annotate the accuracy plot, use the following config (already included, so NO action needed):
 
 ```bash
-train_test_sep: 0              # 0 = internal train-test split; 1 = external test set
-dataset: "ALL_AML"             # Identifier for the dataset used
-filepath: "./datasets/golub_all_aml.csv"  # Path to the input data file
-target: "type"                 # Column name for target labels
+    train_test_sep: 0              # 0 = internal train-test split; 1 = external test set
+    dataset: "ALL_AML"             # Identifier for the dataset used
+    filepath: "./datasets/golub_all_aml.csv"  # Path to the input data file
+    target: "type"                 # Column name for target labels
 
-model_name: "RF"               # Model used: RF = Random Forest
-opt_model: 1                   # Use an optimized/default config for the model
-random_state: 42               # Seed for reproducibility
-debug: 0                       # 1 = Print detailed debug info; 0 = minimal output
-num_runs: 20                   # Number of repeated runs (for averaging)
-remove_cols: False             # Whether to remove previously selected features
+    model_name: "RF"               # Model used: RF = Random Forest
+    opt_model: 1                   # Use an optimized/default config for the model
+    random_state: 42               # Seed for reproducibility
+    debug: 0                       # 1 = Print detailed debug info; 0 = minimal output
+    num_runs: 20                   # Number of repeated runs (for averaging)
+    remove_cols: False             # Whether to remove previously selected features
 
-plot_acc: 1                    # Plot accuracy vs. number of features
-plot_auc: 1                    # Plot AUC vs. number of features
+    plot_acc: 1                    # Plot accuracy vs. number of features
+    plot_auc: 1                    # Plot AUC vs. number of features
 
-interactive: 0                 # 1 = Interactive code execution, asking for confirmationl 0: no confirmation required
-shuffle_cols: 0                # If 1, feature columns are shuffled before selection
+    interactive: 0                 # 1 = Interactive code execution, asking for confirmationl 0: no confirmation required
+    shuffle_cols: 0                # If 1, feature columns are shuffled before selection
 
-feature_ticks_ranges:          # Number of features to try in each experiment run
-  - [1, 51, 1]
-  - [60, 201, 10]
-  - [300, 2001, 100]
+    feature_ticks_ranges:          # Number of features to try in each experiment run
+    - [1, 51, 1]
+    - [60, 201, 10]
+    - [300, 2001, 100]
 
-annotate_paper_results: 1      # Whether to add marker for a published paper's result. If 1, then paper, x_from_paper and y_from_paper should be defined.
-paper: "Lall (2020)"           # Citation or label for the paper
-x_from_paper: 35               # Feature count used in the paper
-y_from_paper: 0.86             # Reported accuracy or AUC in the paper
+    annotate_paper_results: 1      # Whether to add marker for a published paper's result. If 1, then paper, x_from_paper and y_from_paper should be defined.
+    paper: "Lall (2020)"           # Citation or label for the paper
+    x_from_paper: 35               # Feature count used in the paper
+    y_from_paper: 0.86             # Reported accuracy or AUC in the paper
 
 ```
 

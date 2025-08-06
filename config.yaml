@@ -17,9 +17,9 @@ opt_model: 1
 remove_cols: True  # If number of features are more than 20,000 - set it to true
 
 annotate_paper_results: 0  # If 1, then paper, x_from_paper and y_from_paper should be defined.
-# paper: "Lall (2020)"
-# x_from_paper: 35   # No of selected features
-# y_from_paper: .86 # Accuracy with selected features, with decimal point not percentage
+# paper: "Lall (2020)"      # The name of the paper from which the results are taken
+# x_from_paper: 35          # No of selected features
+# y_from_paper: .86         # Accuracy with selected features, with decimal point not percentage
 
 ###################################
 # dataset SPECIFIC parameters: END

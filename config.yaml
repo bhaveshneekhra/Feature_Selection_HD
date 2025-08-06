@@ -1,19 +1,18 @@
-download_datasets: 0
-dataset_urls:
-  - https://sbcb.inf.ufrgs.br/data/cumida/Genes/Lung/GSE18842/Lung_GSE18842.csv
-  - https://sbcb.inf.ufrgs.br/data/cumida/Genes/Lung/GSE19804/Lung_GSE19804.csv 
-  - https://archive.ics.uci.edu/static/public/170/gisette.zip
-
 #####################################
 # dataset SPECIFIC parameters: START
 #####################################
 
+download_datasets: 1  # If 1, then datasets will be downloaded automatically
+                      # If 0, then datasets should be downloaded manually and placed in the datasets folder
+dataset_urls:
+  - https://sbcb.inf.ufrgs.br/data/cumida/Genes/Colorectal/GSE21510/Colorectal_GSE21510.csv
+
 train_test_sep: 0
 
-dataset: "ALL_AML"
-filepath: "./datasets/golub_all_aml.csv"
+dataset: "Colorectal_GSE21510"  # Name of the dataset, should match the filename without extension
+filepath: "./datasets/Colorectal_GSE21510.csv"
 
-opt_model: 1
+opt_model: 0
 remove_cols: True  # If number of features are more than 20,000 - set it to true
 
 annotate_paper_results: 0  # If 1, then paper, x_from_paper and y_from_paper should be defined.
@@ -26,6 +25,8 @@ annotate_paper_results: 0  # If 1, then paper, x_from_paper and y_from_paper sho
 ###################################
 
 
+
+
 ########################################
 # COMMON parameters for datasets: START
 ########################################
@@ -35,7 +36,7 @@ target: 'type'
 model_name: "RF"
 
 random_state: 42
-debug: 1
+debug: 0
 
 num_runs: 20  
 
@@ -53,6 +54,10 @@ feature_ticks_ranges:
 ######################################
 # COMMON parameters for datasets: END
 ######################################
+
+
+# dataset: "Liver_GSE14520_U133A"
+# filepath: "./datasets/Liver_GSE14520_U133A.csv"
 
 # dataset: "GSE4115"
 # filepath: './datasets/GSE4115.csv'
@@ -83,3 +88,15 @@ feature_ticks_ranges:
 
 # test_dataset: "Gisette_validation"
 # test_filepath: "datasets/gisette/GISETTE/gisette_valid.data"
+
+
+# Links to datasets that were previously downloaded:
+  # - https://sbcb.inf.ufrgs.br/data/cumida/Genes/Lung/GSE18842/Lung_GSE18842.csv
+  # - https://sbcb.inf.ufrgs.br/data/cumida/Genes/Lung/GSE19804/Lung_GSE19804.csv 
+  # - https://archive.ics.uci.edu/static/public/170/gisette.zip
+  # - https://sbcb.inf.ufrgs.br/data/cumida/Genes/Liver/GSE14520_U133A/Liver_GSE14520_U133A.csv
+  # - https://sbcb.inf.ufrgs.br/data/cumida/Genes/Leukemia/GSE28497/Leukemia_GSE28497.csv
+  # - https://sbcb.inf.ufrgs.br/data/cumida/Genes/Colorectal/GSE44076/Colorectal_GSE44076.csv
+  # - https://sbcb.inf.ufrgs.br/data/cumida/Genes/Liver/GSE76427/Liver_GSE76427.csv
+  # - https://sbcb.inf.ufrgs.br/data/cumida/Genes/Breast/GSE45827/Breast_GSE45827.csv
+  # - https://sbcb.inf.ufrgs.br/data/cumida/Genes/Colorectal/GSE21510/Colorectal_GSE21510.csv

@@ -23,15 +23,21 @@ plot_acc = fs_utils.config['plot_acc']
 plot_auc = fs_utils.config['plot_auc']
 
 print(f'for dataset: {dataset}, the common setting are:')
-
+print("-"*25)
 print(f'Whether to download the datasets: {download_datasets}')
 print(f'model to use for training: {model_name}')
 print(f'Whether to optimise the model: {opt_model}')
 print(f'random state: {random_state}')
 print(f'Whether to print debug level information: {debug}')
 print(f'For each randomly selected subset, how many runs: {num_runs}')
-print(f'While plotting, whether to plot Accuracy: {plot_acc}')
-print(f'While plotting, whether to plot AUC: {plot_auc}')
+print(f'Whether to plot Accuracy: {plot_acc}')
+print(f'Whether to plot AUC: {plot_auc}')
+
+print("-"*25)
+print("\n\nContinuing with the script...\n\n")
+print("-"*25)
+
+time.sleep(5)
 
 filepath = fs_utils.config['filepath']
 
@@ -104,11 +110,7 @@ if fs_utils.config["dataset"]=="Colon" or fs_utils.config["dataset"]=="Alon1999_
         # print("Check the column names")
         pass
 
-elif fs_utils.config["dataset"]=="Leukemia_GSE28497" or fs_utils.config["dataset"]=="Colorectal_GSE44076" or fs_utils.config["dataset"]=="Liver_GSE76427" \
-    or fs_utils.config["dataset"]=="Breast_GSE45827" or fs_utils.config['dataset']=="Colorectal_GSE21510" or fs_utils.config['dataset']=="Renal_GSE53757"\
-        or fs_utils.config['dataset']=="Breast_GSE22820" or fs_utils.config['dataset']=="Brain_GSE50161" or fs_utils.config['dataset']=='Prostate_GSE6919_U95B'\
-            or fs_utils.config['dataset']=='Lung_GSE19804' or fs_utils.config['dataset']=='Throat_GSE42743' or fs_utils.config['dataset']=='Ovary_GSE6008' \
-                or fs_utils.config['dataset']=='Lung_GSE18842':
+elif '_GSE' in fs_utils.config['dataset']:
     try:
         data_final.set_index('samples', inplace=True)
     except:
@@ -204,6 +206,8 @@ print("Class-wise distribution: ", (data_final[fs_utils.config['target']].value_
 print("-"*25)
 print(data_final.shape)
 print("-"*25)
+print("Columns in the dataset:")
+print(data_final.columns)
 
 
 if fs_utils.config['train_test_sep']:
@@ -226,7 +230,7 @@ if fs_utils.config['train_test_sep']:
     test_col = test_df.pop(fs_utils.config['target'])
     test_df[fs_utils.config['target']] = test_col
 
-
+# Ensure the target column is at the end of the DataFrame
 y = data_final[fs_utils.config['target']]
 # encoding labels
 le = LabelEncoder()
@@ -321,6 +325,7 @@ if fs_utils.config['annotate_paper_results']:
 
 
 from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.ensemble import VotingClassifier
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import train_test_split
@@ -361,8 +366,8 @@ for n_models in [5, 7, 9, 11, 13]:  # ensemble sizes
     # Prepare estimators
     estimators = []
     for i, idx in enumerate(feature_indices_list):
-        clf = LogisticRegression(max_iter=1000, solver='liblinear')
-        # clf = RandomForestClassifier(random_state=42)
+        # clf = LogisticRegression(max_iter=1000, solver='liblinear')
+        clf = RandomForestClassifier(random_state=42)
         estimators.append((f'model_{i}', SubsetFeatureModel(clf, idx)))
 
     # Voting classifier ensemble
@@ -488,9 +493,9 @@ rf = RandomForestClassifier(n_estimators=100, max_depth=5, random_state=1)
 xgb = XGBClassifier(n_estimators=100, max_depth=4, use_label_encoder=False, eval_metric='logloss', random_state=1)
 base_models = [lr, rf, xgb] *3 # total 9 base models
 
-# n_features = int(np.round(X.shape[1]* 0.01))  # number of features for each model
+n_features = [int(np.round(X.shape[1]* 0.01))]  # number of features for each model
 
-n_features = [300, 400, 500, 600, 700, 800, 900, 1000]  # different feature sizes for each model
+# n_features = [300, 400, 500, 600, 700, 800, 900, 1000]  # different feature sizes for each model
 seed = 42  # random seed for reproducibility
 
 for n_feat in n_features:
@@ -513,3 +518,8 @@ print(f'for dataset {fs_utils.config["dataset"]} ({data_final.shape[0]} samples,
 print(f'{y.value_counts()}')
 print(f"Random Feature Ensemble with {n_feat} features per model and random seed {seed}:")
 print(f"Voting Ensemble: Mean Accuracy = {voting_mean:.4f}, Median Accuracy = {voting_median:.4f}, Std = {voting_std:.4f}")
+
+print("-"*25)
+
+print(f"Random Feature Ensemble completed for the dataset {fs_utils.config['dataset']}.")
+print("**** End of the script ****")

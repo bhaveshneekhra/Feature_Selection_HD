@@ -49,7 +49,7 @@ pip install -r requirements.txt
 
 * Download Datasets
 
-    You can download the datasets manually or via wget:
+    You can download the datasets manually or automatically through code by specifying config parameteres in the script (described later):
 
     🔹 Option 1: Manual Download
 
@@ -67,6 +67,15 @@ pip install -r requirements.txt
     wget https://sbcb.inf.ufrgs.br/data/cumida/Genes/Lung/GSE18842/Lung_GSE18842.csv
 
     wget https://sbcb.inf.ufrgs.br/data/cumida/Genes/Lung/GSE19804/Lung_GSE19804.csv
+    ```
+
+    If you want the dataset to be downloaded autmotically, specify these two parameters in the config.yaml file
+    ```bash
+    download_datasets: 0  # If 1, then datasets will be downloaded automatically
+                          # If 0, then datasets should be downloaded manually and placed in the datasets folder
+    dataset_urls:
+        - https://sbcb.inf.ufrgs.br/data/cumida/Genes/Leukemia/GSE28497/Leukemia_GSE28497.csv
+        - # If you provide multiple links, the script will download them all if not already downloaded. 
     ```
 
 ### 5. ⚙️ Use appropriate configuration

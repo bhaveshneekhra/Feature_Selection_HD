@@ -2,15 +2,19 @@
 # dataset SPECIFIC parameters: START
 #####################################
 
-download_datasets: 1  # If 1, then datasets will be downloaded automatically
+download_datasets: 0  # If 1, and a valid URL is provided (see next parameter) then datasets will be downloaded automatically
                       # If 0, then datasets should be downloaded manually and placed in the datasets folder
 dataset_urls:
   - https://sbcb.inf.ufrgs.br/data/cumida/Genes/Colorectal/GSE21510/Colorectal_GSE21510.csv
 
 train_test_sep: 0
-
-dataset: "Colorectal_GSE21510"  # Name of the dataset, should match the filename without extension
-filepath: "./datasets/Colorectal_GSE21510.csv"
+# test_dataset:
+# test_filepath:
+                        # If train_test_sep is 1, then test_dataset and test_filepath should be defined
+                        # If train_test_sep is 0, then train and test datasets will be combined
+  
+dataset: "ALL_AML"
+filepath: "./datasets/golub_all_aml.csv"
 
 opt_model: 0
 remove_cols: True  # If number of features are more than 20,000 - set it to true
@@ -55,6 +59,8 @@ feature_ticks_ranges:
 # COMMON parameters for datasets: END
 ######################################
 
+# dataset: "Colorectal_GSE21510"  
+# filepath: "./datasets/Colorectal_GSE21510.csv"
 
 # dataset: "Liver_GSE14520_U133A"
 # filepath: "./datasets/Liver_GSE14520_U133A.csv"

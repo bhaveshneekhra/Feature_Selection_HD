@@ -1,3 +1,4 @@
+from logging import config
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -87,10 +88,11 @@ def load_config(path="config.yaml", validate=True, confirm=False):
     if validate:
         _validate_config(config)
 
-    if confirm:
-        print("loaded config:\n")
-        for k, v in config.items():
-            print(f"  {k}: {v}")
+    print("loaded config:\n")
+    for k, v in config.items():
+        print(f"  {k}: {v}")
+    
+    if confirm:    
         resp = input("\ncontinue with these settings? [y/n]: ").strip().lower()
         if resp not in ("y", "yes"):
             print("aborting.")
@@ -477,16 +479,78 @@ def check_model_acc_full_feature(df, debug=config['debug'], average='macro', opt
         model_sep.fit(x, y)
 
         predictions_test = model_sep.predict(X_test_sep)
+
         if debug:
             print(classification_report(y_test_sep, predictions_test))
         accuracy_test = accuracy_score(y_test_sep, predictions_test)
         
+        try:
+            y_scores_sep = model_sep.predict_proba(X_test_sep)
+        except AttributeError:
+            y_scores_sep = model_sep.decision_function(X_test_sep)
+
+        y_scores_sep = np.array(y_scores_sep)
+        y_test_sep = np.array(y_test_sep)
+
+        full_probs = np.zeros((len(X_test_sep), n_classes))
+        for i, c in enumerate(model_sep.classes_):  # these are class *indices*, already encoded
+            full_probs[:, c] = y_scores_sep[:, i]
+
+        # roc & pr auc for binary
+        if n_classes == 2:
+            if y_scores_sep.ndim == 2:
+                y_scores_sep = y_scores_sep[:, 1]  # prob or score for positive class
+
+            roc_auc = roc_auc_score(y_test_sep, y_scores_sep)
+            pr_auc = average_precision_score(y_test_sep, y_scores_sep)
+            if debug:
+                print(f"Binary classification: AUC={roc_auc}, PR AUC={pr_auc}")
+                print(f"y_scores shape: {y_scores_sep.shape}, y_test shape: {y_test_sep.shape}")
+
+                fpr, tpr, thresholds = roc_curve(y_test_sep, y_scores_sep)
+                roc_auc = auc(fpr, tpr)
+
+                plt.figure(figsize=(6, 5))
+                plt.plot(fpr, tpr, label=f"ROC curve (AUC = {roc_auc:.4f})")
+                plt.plot([0, 1], [0, 1], 'k--', label="Chance level (AUC = 0.5)")
+                plt.xlabel("False Positive Rate")
+                plt.ylabel("True Positive Rate")
+                plt.title("Receiver Operating Characteristic (ROC)")
+                plt.legend(loc="lower right")
+                plt.show()
+
+        else:
+            try:
+                if y_scores_sep.shape[1] != n_classes:
+                    raise ValueError(f"Expected y_scores to have shape (n_samples, {n_classes}), got {y_scores_sep.shape}")
+            except IndexError as e:
+                print(f"Error: {e}")
+                
+
+            y_test_bin = label_binarize(y_test_sep, classes=np.arange(n_classes))
+
+            if average is None:         # Per class AUCs
+                roc_auc = [roc_auc_score(y_test_bin[:, i], full_probs[:, i]) for i in range(n_classes)]
+                pr_auc = [average_precision_score(y_test_bin[:, i], full_probs[:, i]) for i in range(n_classes)]
+            else:
+                roc_auc = roc_auc_score(y_test_bin, full_probs, multi_class='ovo', average=average)
+                pr_auc = average_precision_score(y_test_bin, full_probs, average=average)
+
+            if debug:
+                print("Multiclass classification")
+                print("Number of classes: ", len(np.unique(y_test_sep)))
+                print(f"AUC={roc_auc}, PR AUC={pr_auc}")
+                print(f"y_scores shape: {full_probs.shape}, y_test shape: {y_test_sep.shape}")
+                print(f"y scores: {full_probs}")
+                print(f"y test: {y_test_sep}")
+
+
         y_pred_prob_sep = model_sep.predict_proba(X_test_sep)[:, 1]
-        auc_test = roc_auc_score(y_test_sep, y_pred_prob_sep)
+        # auc_test = roc_auc_score(y_test_sep, y_pred_prob_sep)
 
         if debug:
             print("Accuracy on separate test set: ", accuracy_test, end='\t')
-            print("AUC on separate test set: ", auc_test, end='\t')
+            print("AUC on separate test set: ", roc_auc, end='\t')
 
         if n_classes == 2 and debug:
             y_true = y_test_sep
@@ -531,7 +595,7 @@ def check_model_acc_full_feature(df, debug=config['debug'], average='macro', opt
             acc = accuracy_score(y_true, preds)
             print(f"Accuracy at threshold {best_thresh:.3f}: {acc:.4f}")
 
-        return accuracy_test, auc_test
+        return accuracy_test, roc_auc
 
 
 def random_features_model_accuracy(df, batch_size=20, debug=config['debug'], train_test_sep=config['train_test_sep'], test_df = pd.DataFrame()):

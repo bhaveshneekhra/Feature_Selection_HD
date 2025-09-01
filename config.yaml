@@ -5,19 +5,21 @@
 download_datasets: 0  # If 1, and a valid URL is provided (see next parameter) then datasets will be downloaded automatically
                       # If 0, then datasets should be downloaded manually and placed in the datasets folder
 dataset_urls:
-  - https://sbcb.inf.ufrgs.br/data/cumida/Genes/Colorectal/GSE21510/Colorectal_GSE21510.csv
+  - 
 
-train_test_sep: 0
-# test_dataset:
-# test_filepath:
+train_test_sep: 1
+dataset: 'Wu2021_Breast'    # Name of the test dataset, if any
+filepath: './datasets/Data_Wu2021_Breast_annotated_with_cell_types_only_hk_genes.parquet'  # Path to the test dataset
                         # If train_test_sep is 1, then test_dataset and test_filepath should be defined
                         # If train_test_sep is 0, then train and test datasets will be combined
-  
-dataset: "ALL_AML"
-filepath: "./datasets/golub_all_aml.csv"
+
+test_dataset: 'Qian2020_Breast'    # Name of the dataset 
+test_filepath: './datasets/Data_Qian2020_Breast_annotated_with_cell_types_only_hk_genes.parquet'  # Path to the dataset
+
+expr_with_housekeeping_genes: False    # Whether to perform experiment with housekeeping genes in the expression data
 
 opt_model: 0
-remove_cols: True  # If number of features are more than 20,000 - set it to true
+remove_cols: False  # If number of features are more than 20,000 - set it to true
 
 annotate_paper_results: 0  # If 1, then paper, x_from_paper and y_from_paper should be defined.
 # paper: "Lall (2020)"      # The name of the paper from which the results are taken
@@ -36,6 +38,7 @@ annotate_paper_results: 0  # If 1, then paper, x_from_paper and y_from_paper sho
 ########################################
 
 target: 'type'
+# target: 'Diagnosis'  # The target column in the dataset
 
 model_name: "RF"
 
@@ -51,6 +54,9 @@ interactive: 0
 shuffle_cols: 0
 
 feature_ticks_ranges:
+  # - [1, 11, 1]
+  # - [11, 21, 1]
+  # - [21, 31, 1]
   - [1, 51, 1]
   - [60, 201, 10]
   - [300, 2001, 100]
@@ -58,6 +64,12 @@ feature_ticks_ranges:
 ######################################
 # COMMON parameters for datasets: END
 ######################################
+
+# dataset: 'Lung Single-cell RNA-Seq Cell Types'  
+# filepath: './datasets/Data_Bischoff2021_Lung_annotated_with_cell_types.parquet'
+
+# dataset: "breast_cancer_wisconsin_diagnostic"
+# filepath: "./datasets/breast_cancer_wisconsin_diagnostic.csv"
 
 # dataset: "Colorectal_GSE21510"  
 # filepath: "./datasets/Colorectal_GSE21510.csv"

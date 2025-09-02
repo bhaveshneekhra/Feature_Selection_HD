@@ -7,16 +7,18 @@ download_datasets: 0  # If 1, and a valid URL is provided (see next parameter) t
 dataset_urls:
   - 
 
-train_test_sep: 1
-dataset: 'Wu2021_Breast'    # Name of the test dataset, if any
-filepath: './datasets/Data_Wu2021_Breast_annotated_with_cell_types_only_hk_genes.parquet'  # Path to the test dataset
-                        # If train_test_sep is 1, then test_dataset and test_filepath should be defined
-                        # If train_test_sep is 0, then train and test datasets will be combined
+train_test_sep: 1   # If train_test_sep is 1, then test_dataset and test_filepath should be defined
+                      # If train_test_sep is 0, then train and test datasets will be combined
 
+dataset: 'Wu2021_Breast'    # Name of the dataset
+filepath: './datasets/Data_Wu2021_Breast_annotated_with_cell_types.parquet'  # Path to the dataset
+                        
 test_dataset: 'Qian2020_Breast'    # Name of the dataset 
-test_filepath: './datasets/Data_Qian2020_Breast_annotated_with_cell_types_only_hk_genes.parquet'  # Path to the dataset
+test_filepath: './datasets/Data_Qian2020_Breast_annotated_with_cell_types.parquet'  # Path to the dataset
+
 
 expr_with_housekeeping_genes: False    # Whether to perform experiment with housekeeping genes in the expression data
+expr_with_highly_variable_genes: True    # Whether to perform experiment with highly variable genes in the expression data
 
 opt_model: 0
 remove_cols: False  # If number of features are more than 20,000 - set it to true

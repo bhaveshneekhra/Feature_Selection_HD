@@ -7,26 +7,19 @@ download_datasets: 0  # If 1, and a valid URL is provided (see next parameter) t
 dataset_urls:
   - 
 
-train_test_sep: 1   # If train_test_sep is 1, then test_dataset and test_filepath should be defined
+train_test_sep: 0   # If train_test_sep is 1, then test_dataset and test_filepath should be defined
                       # If train_test_sep is 0, then train and test datasets will be combined
 
-dataset: 'Wu2021_Breast'    # Name of the dataset
-filepath: './datasets/Data_Wu2021_Breast_annotated_with_cell_types.parquet'  # Path to the dataset
-                        
-test_dataset: 'Qian2020_Breast'    # Name of the dataset 
-test_filepath: './datasets/Data_Qian2020_Breast_annotated_with_cell_types.parquet'  # Path to the dataset
+dataset: "ALL_AML"
+filepath: "./datasets/golub_all_aml.csv"
 
-
-expr_with_housekeeping_genes: False    # Whether to perform experiment with housekeeping genes in the expression data
-expr_with_highly_variable_genes: True    # Whether to perform experiment with highly variable genes in the expression data
-
-opt_model: 0
+opt_model: 1
 remove_cols: False  # If number of features are more than 20,000 - set it to true
 
-annotate_paper_results: 0  # If 1, then paper, x_from_paper and y_from_paper should be defined.
-# paper: "Lall (2020)"      # The name of the paper from which the results are taken
-# x_from_paper: 35          # No of selected features
-# y_from_paper: .86         # Accuracy with selected features, with decimal point not percentage
+annotate_paper_results: 1  # If 1, then paper, x_from_paper and y_from_paper should be defined.
+paper: "Lall (2020)"      # The name of the paper from which the results are taken
+x_from_paper: 35          # No of selected features
+y_from_paper: .86         # Accuracy with selected features, with decimal point not percentage
 
 ###################################
 # dataset SPECIFIC parameters: END
@@ -56,9 +49,6 @@ interactive: 0
 shuffle_cols: 0
 
 feature_ticks_ranges:
-  # - [1, 11, 1]
-  # - [11, 21, 1]
-  # - [21, 31, 1]
   - [1, 51, 1]
   - [60, 201, 10]
   - [300, 2001, 100]
